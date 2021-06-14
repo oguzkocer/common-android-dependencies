@@ -1,0 +1,10 @@
+tasks.register("resolveDependencies") {
+    rootProject.allprojects { project ->
+        Set<Configuration> configurations = project.buildscript.configurations + project.configurations
+        configurations
+                .findAll { it.canBeResolved }
+                .forEach {
+                    it.resolve()
+                }
+    }
+}
